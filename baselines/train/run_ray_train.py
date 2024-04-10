@@ -134,16 +134,21 @@ if __name__ == "__main__":
 
 
   # Setup WanDB 
-  if "WANDB_API_KEY" in os.environ and args.wandb:
+  # if "WANDB_API_KEY" in os.environ and args.wandb:
+  if args.wandb:
     wandb_project = f'{args.exp}_{args.framework}'
     wandb_group = "meltingpot"
+    
+    # HACK: This is a temporary fix to get the API key from the environment variable.
+    my_api_key = "46f3ed820eafa8cf5273e30a68c458397d94e54c"
 
     # Set up Weights And Biases logging if API key is set in environment variable.
     wdb_callbacks = [
         WandbLoggerCallback(
             project=wandb_project,
             group=wandb_group,
-            api_key=os.environ["WANDB_API_KEY"],
+            # api_key=os.environ["WANDB_API_KEY"],
+            api_key=my_api_key,
             log_config=True,
         )
     ]
