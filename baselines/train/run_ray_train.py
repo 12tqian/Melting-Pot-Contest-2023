@@ -2,7 +2,6 @@ import argparse
 import os
 import ray
 
-
 from typing import *
 from ray import air
 from ray import tune
@@ -11,6 +10,7 @@ from ray.rllib.algorithms import ppo
 from ray.tune import registry
 from ray.air.integrations.wandb import WandbLoggerCallback
 from baselines.train import make_envs
+from wandb_api_key import WANDB_API_KEY
 
 def get_cli_args():
   
@@ -140,7 +140,6 @@ if __name__ == "__main__":
     wandb_group = "meltingpot"
     
     # HACK: This is a temporary fix to get the API key from the environment variable.
-    my_api_key = "46f3ed820eafa8cf5273e30a68c458397d94e54c"
 
     # Set up Weights And Biases logging if API key is set in environment variable.
     wdb_callbacks = [
@@ -148,7 +147,7 @@ if __name__ == "__main__":
             project=wandb_project,
             group=wandb_group,
             # api_key=os.environ["WANDB_API_KEY"],
-            api_key=my_api_key,
+            api_key=WANDB_API_KEY,
             log_config=True,
         )
     ]
