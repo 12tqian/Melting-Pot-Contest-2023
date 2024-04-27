@@ -23,6 +23,7 @@ SUPPORTED_SCENARIOS = [
     'territory__rooms_1',
     'territory__rooms_2',
     'territory__rooms_3',
+    'coins',
 ]
 
 IGNORE_KEYS = ['WORLD.RGB', 'INTERACTION_INVENTORIES', 'NUM_OTHERS_WHO_CLEANED_THIS_STEP']
@@ -38,6 +39,8 @@ def get_experiment_config(args, default_config):
         substrate_name = "clean_up"
     elif args.exp == 'territory_rooms':
         substrate_name = "territory__rooms"
+    elif args.exp == 'coins':
+        substrate_name = "coins"
     else:
         raise Exception("Please set --exp to be one of ['pd_arena', 'al_harvest', 'clean_up', \
                         'territory_rooms']. Other substrates are not supported.")
@@ -86,9 +89,9 @@ def get_experiment_config(args, default_config):
         # experiment trials
         "exp_name": args.exp,
         "stopping": {
-                    #"timesteps_total": 1000000,
-                    "training_iteration": 1,
-                    #"episode_reward_mean": 100,
+                    "timesteps_total": 1000000,
+                    # "training_iteration": 1,
+                    # "episode_reward_mean": 100,
         },
         "num_checkpoints": 5,
         "checkpoint_interval": 10,
